@@ -1,7 +1,6 @@
 import React from 'react';
-import Button from './Button';
 import heroBackground from '../images/hero-background.jpg';
-import { Link } from'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function HeroSection() {
   return (
@@ -12,8 +11,12 @@ function HeroSection() {
           Become a Life Saver <br /> For Someone
         </h1>
         <div className="flex gap-4 items-start mt-8 max-w-full text-lg font-medium uppercase whitespace-nowrap w-[305px]">
-          <Link to="/donation"  className="bg-orange-400 text-white py-4 px-4 rounded-md mt-4 li" variant="primary">Donate</Link>
-          <Button variant="secondary">Discover</Button>
+          <Link
+            to="/discover"
+            className="bg-yellow-500 text-white py-4 px-6 rounded-md mt-4 inline-block text-center hover:bg-yellow-600 transition duration-300"
+          >
+            Discover
+          </Link>
         </div>
       </div>
     </section>

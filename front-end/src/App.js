@@ -8,17 +8,19 @@ import SignupPage from './components/SignUp';
 import DonationPage from './components/DonationPage';
 import Home from './components/Home';
 import FeedbackPage from './components/FeedbackPage';
+import DiscoverPage from './components/DiscoverPage';
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route exact path="/" element={<LandingPage />} /> 
+        <Route path="/" element={<LandingPage />} /> 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/Home" element={<Home />} />
+        <Route path="/home" element={<Home />} /> 
         <Route path="/donation" element={<DonationPage />} />
         <Route path="/feedback" element={<FeedbackPage />} />
+        <Route path="/discover" element={<DiscoverPage />} /> 
       </Routes>
     </div>
   );
