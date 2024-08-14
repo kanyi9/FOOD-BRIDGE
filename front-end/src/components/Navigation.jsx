@@ -4,29 +4,29 @@ import { useLocation, Link, useNavigate } from 'react-router-dom';
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate(); 
-  const navItems = ['Home', 'About Us', 'Events', 'Feedback'];
+  const navigate = useNavigate();
+  const navItems = ['Home', 'About', 'Events', 'Feedback'];
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const scrollToAnchor = (anchorName) => {
-    const anchorElement = document.getElementById(anchorName);
-    if (anchorElement) {
-      window.scrollTo({
-        top: anchorElement.offsetTop,
-        behavior: 'smooth',
-      });
+  const handleNavClick = (item) => {
+    if (item === 'Events') {
+      document.getElementById('events')?.scrollIntoView({ behavior: 'smooth' });
+    } else if (item === 'About') {
+      document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate(`/${item.toLowerCase().replace(/\s+/g, '-')}`);
     }
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); 
-    navigate('/'); 
+    localStorage.removeItem('token');
+    navigate('/');
   };
 
-  const isLoggedIn = !!localStorage.getItem('token'); 
+  const isLoggedIn = !!localStorage.getItem('token');
 
   return (
     <nav className="relative flex flex-col md:flex-row items-center justify-between px-4 py-2 bg-white md:px-8">
@@ -45,51 +45,19 @@ const Navigation = () => {
       <div className={`flex-col md:flex-row md:flex md:items-center md:space-x-8 ${isMenuOpen ? 'flex' : 'hidden'}`}>
         <div className="flex flex-col md:flex-row md:items-center">
           {navItems.map((item, index) => {
-            const routePath = `/${item.toLowerCase().replace(/\s+/g, '-') === 'home' ? '' : item.toLowerCase().replace(/\s+/g, '-')}`;
-            const isActive = location.pathname === routePath;
-            const anchorName = item.toLowerCase().replace(/\s+/g, '-');
+            const isActive = location.pathname === `/${item.toLowerCase().replace(/\s+/g, '-')}` || (item === 'Events' && location.pathname === '/events');
 
-            if (item === 'Events') {
-              return (
-                <button
-                  key={index}
-                  onClick={() => scrollToAnchor('campaigns')}
-                  className={`block px-3 py-2 text-lg font-medium border-b-2 transition-colors duration-300 ${
-                    isActive ? 'text-orange-500 border-orange-500' : 'text-gray-700 hover:text-gray-900 hover:border-gray-900'
-                  }`}
-                >
-                  {item}
-                </button>
-              );
-            } else if (item === 'Feedback') {
-              return (
-                <Link
-                  key={index}
-                  to="/feedback"
-                  className={`block px-3 py-2 text-lg font-medium border-b-2 transition-colors duration-300 ${
-                    isActive ? 'text-orange-500 border-orange-500' : 'text-gray-700 hover:text-gray-900 hover:border-gray-900'
-                  }`}
-                >
-                  {item}
-                </Link>
-              );
-            } else {
-              return (
-                <Link
-                  key={index}
-                  to={routePath}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToAnchor(anchorName);
-                  }}
-                  className={`block px-3 py-2 text-lg font-medium border-b-2 transition-colors duration-300 ${
-                    isActive ? 'text-orange-500 border-orange-500' : 'text-gray-700 hover:text-gray-900 hover:border-gray-900'
-                  }`}
-                >
-                  {item}
-                </Link>
-              );
-            }
+            return (
+              <button
+                key={index}
+                onClick={() => handleNavClick(item)}
+                className={`block px-3 py-2 text-lg font-medium border-b-2 transition-colors duration-300 ${
+                  isActive ? 'text-orange-500 border-orange-500' : 'text-gray-700 hover:text-gray-900 hover:border-gray-900'
+                }`}
+              >
+                {item}
+              </button>
+            );
           })}
         </div>
         <Link to="/donation" className="mt-4 md:mt-0 px-6 py-2 text-white uppercase whitespace-nowrap bg-orange-300 rounded-[34px]">
