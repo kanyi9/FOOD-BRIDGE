@@ -6,8 +6,8 @@ import LandingPage from './components/LandingPage';
 import LoginPage from './components/Login';
 import SignupPage from './components/SignUp';
 import DonationPage from './components/DonationPage';
-import ContactUs from './components/ContactUs';
 import Home from './components/Home';
+import FeedbackPage from './components/FeedbackPage';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/donation" element={<DonationPage />} />
-        <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/feedback" element={<FeedbackPage />} />
       </Routes>
     </div>
   );
